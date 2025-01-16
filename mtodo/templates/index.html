@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>mtodo</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     </head>
     <body>
         <header>mtodo</header>
@@ -17,6 +17,6 @@
             <div id="toast"></div>
             <ul></ul>
         </main>
-        <script src="main.js"></script>
+        <script src="{{ url_for('static', filename='main.js') }}"></script>
     </body>
 </html>

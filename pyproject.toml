@@ -1,0 +1,13 @@
+[project]
+name = "mtodo"
+version = "0.0.1"
+description = "mtodo is a minimal todo web application"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "flask>=3.1.0",
+]
+
+[build-system]
+requires = ["flit_core>=3.4"]
+build-backend = "flit_core.buildapi"
