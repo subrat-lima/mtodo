@@ -1,38 +1,6 @@
-<!DOCTYPE html>
-<html lang=en>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>mtodo</title>
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <style>
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-            html, body {
-                width: 100%;
-                height: 100%;
-            }
-            body {
-                background: linen;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-family: monospace;
-                font-size: 2rem;
-                text-align: center;
-            }
-            h1 {
-                font-size: 5rem;
-            }
-        </style>
-    </head>
-    <body>
-        <main>
-            <h1>{{ message }}</h1>
-            <a href="{{ url_for('index') }}">Go to Homepage</a>
-        </main>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block error_content %}
+<h1>{{ error_message }}</h1>
+<a href="{{ url_for('base.index') }}">Go to Homepage</a>
+{% endblock %}

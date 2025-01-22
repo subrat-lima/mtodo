@@ -5,9 +5,10 @@ from mtodo import create_app
 
 @pytest.fixture
 def app():
-    test_config = {"TESTING": True}
+    test_config = {"TESTING": True, "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:"}
     app = create_app(test_config)
-    yield app
+    with app.app_context():
+        yield app
 
 
 @pytest.fixture

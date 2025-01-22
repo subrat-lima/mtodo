@@ -17,7 +17,7 @@ header {
     text-align: center;
 }
 
-main {
+main, nav {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,5 +96,36 @@ li {
         border: 0;
         font-size: 1.5em;
         font-weight: bold;
+    }
+}
+
+nav > ul {
+    flex-direction: row;
+    justify-content: space-around;
+
+    .primary {
+        font-size: 2rem;
+    }
+
+    li {
+        border: 0;
+        width: auto;
+    }
+}
+
+.error {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    a {
+        font-size: 1.5rem;
     }
 }

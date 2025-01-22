@@ -1,5 +1,5 @@
 let add_form = document.querySelector("form");
-let ul = document.querySelector("ul");
+let ul = document.getElementById("todos");
 let toast = document.getElementById("toast");
 let todos;
 

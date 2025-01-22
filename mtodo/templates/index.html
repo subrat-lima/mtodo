@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang=en>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>mtodo</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    </head>
-    <body>
-        <header>mtodo</header>
-        <main>
-            <form>
-                <input type="text" name="todo" placeholder="enter text...">
-                <input type="submit" value="+">
-            </form>
-            <div id="toast"></div>
-            <ul></ul>
-        </main>
-        <script src="{{ url_for('static', filename='main.js') }}"></script>
-    </body>
-</html>
+{% extends "base.html" %}
+{% import "macros.jinja" as macros %}
+
+{% block main_content %}
+<form>
+    <input type="text" name="todo" placeholder="enter text...">
+    <input type="submit" value="+">
+</form>
+<div id="toast"></div>
+<ul id="todos"></ul>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% macro flask_flash_messages() %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="container">
+    {% for category, message in messages %}
+        <div class="{{ category }} notification show">
+            {{ message }}
+            <button onclick="dismissNotification(this)">✖</button>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+{% endmacro %}
+
+{% macro render_nav_link(endpoint, text) %}
+<li>
+    {% if request.endpoint == endpoint %}
+    <a href="{{ url_for(endpoint) }}" aria-current="page">{{ text }}</a>
+    {% else %}
+    <a href="{{ url_for(endpoint) }}">{{ text }}</a>
+    {% endif %}
+</li>
+{% endmacro %}
