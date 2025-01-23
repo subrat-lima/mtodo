@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template
 from werkzeug.exceptions import HTTPException
 
-from .blueprints import base, google
+from .blueprints import base, google, todo
 from .models import db, login_manager
 
 load_dotenv()
@@ -33,5 +33,6 @@ def create_app(config_obj={}):
 
     app.register_blueprint(base.bp)
     app.register_blueprint(google.bp)
+    app.register_blueprint(todo.bp)
 
     return app

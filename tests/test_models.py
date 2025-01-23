@@ -3,27 +3,7 @@ from datetime import datetime
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from mtodo.models import OAuth, User, db
-
-
-@pytest.fixture
-def default_user(app):
-    user = User(email="john@email.com")
-    db.session.add(user)
-    db.session.commit()
-
-
-@pytest.fixture
-def default_oauth(default_user):
-    user = db.session.query(User).first()
-    oauth = OAuth(
-        provider="dummy-provider",
-        provider_user_id="5",
-        user_id=user.id,
-        token={"key": "value"},
-    )
-    db.session.add(oauth)
-    db.session.commit()
+from mtodo.models import OAuth, Todo, User, db
 
 
 class TestUser:
@@ -68,4 +48,29 @@ class TestOAuth:
                 token={"key": "value"},
             )
             db.session.add(oauth)
+            db.session.commit()
+
+
+class TestTodo:
+    def test_todo_add(self, default_todo):
+        user = db.session.query(User).first()
+        todo = db.session.query(Todo).first()
+        assert todo is not None
+        assert todo.id is not None
+        assert todo.user == user
+        assert todo.text == "task 1"
+        assert todo.done == False
+
+    @pytest.mark.parametrize(
+        ("user_id", "text", "done"),
+        [
+            (1, "task 1", True),
+            (None, "text", False),
+            (1, None, False),
+        ],
+    )
+    def test_todo_constraints(self, default_todo, user_id, text, done):
+        with pytest.raises(IntegrityError):
+            todo = Todo(text=text, done=done, user_id=user_id)
+            db.session.add(todo)
             db.session.commit()
