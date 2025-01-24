@@ -5,6 +5,7 @@ from flask import Flask, render_template
 from werkzeug.exceptions import HTTPException
 
 from .blueprints import base, google, todo
+from .extensions import socketio
 from .models import db, login_manager
 
 load_dotenv()
@@ -26,6 +27,7 @@ def create_app(config_obj={}):
     app.config.update(config_obj)
     db.init_app(app)
     login_manager.init_app(app)
+    socketio.init_app(app)
 
     with app.app_context():
         db.create_all()

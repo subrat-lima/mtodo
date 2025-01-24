@@ -1,6 +1,6 @@
 [project]
 name = "mtodo"
-version = "0.0.2"
+version = "0.0.3"
 description = "mtodo is a minimal todo web application"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -8,6 +8,7 @@ dependencies = [
     "flask>=3.1.0",
     "flask-dance>=7.1.0",
     "flask-login>=0.6.3",
+    "flask-socketio>=5.5.1",
     "flask-sqlalchemy>=3.1.1",
     "python-dotenv>=1.0.1",
 ]

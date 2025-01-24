@@ -10,71 +10,69 @@ body {
   font-size: 1rem;
 }
 
-header {
-  margin: 1rem auto;
-  font-size: 5rem;
+button {
+  background: none;
+  border: 0;
   font-weight: bold;
-  text-align: center;
 }
 
-main,
-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 90%;
-  width: 800px;
-  margin: auto;
+input {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid black;
+  font-family: monospace;
+  font-size: 1rem;
 }
 
 button,
 input[type="submit"] {
   cursor: pointer;
+  font-weight: bold;
 }
 
-form {
+main {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 90%;
+  width: 800px;
+  margin: auto;
+}
+
+main.error {
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+nav {
+  max-width: 90%;
+  width: 800px;
   margin: 1rem auto;
-
-  input {
-    padding: 0.5rem 1rem;
-    background: none;
-    border: 1px solid black;
-    font-family: monospace;
-    font-size: 1rem;
-  }
-
-  input[type="text"] {
-    flex: 1;
-    margin-right: 0.25rem;
-  }
-
-  input[type="submit"] {
-    font-weight: bold;
-  }
 }
 
 ul {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 2rem;
   list-style: none;
 }
 
-ul:empty:before {
-  content: "no todo items available ...";
-  text-align: center;
-}
+ul#todos {
+  margin-top: 2rem;
 
-li {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin: 0.5rem auto;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid black;
+  li {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid black;
+    border-bottom: 0;
+  }
+
+  li:last-child {
+    border-bottom: 1px solid black;
+  }
 
   label {
     flex: 1;
@@ -91,42 +89,57 @@ li {
     color: darkgray;
     text-decoration: line-through;
   }
+}
 
-  button {
-    background: none;
-    border: 0;
-    font-size: 1.5em;
-    font-weight: bold;
-  }
+ul#todos:empty:before {
+  content: "no todo items available ...";
+  text-align: center;
 }
 
 nav > ul {
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+}
 
-  .primary {
-    font-size: 2rem;
-  }
+form {
+  display: flex;
+  width: 100%;
+  margin: 1rem auto;
 
-  li {
-    border: 0;
-    width: auto;
+  input[type="text"] {
+    flex: 1;
+    margin-right: 0.25rem;
   }
 }
 
-.error {
+div.message {
   display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
 
-  h1 {
-    font-size: 4rem;
+  span {
+    flex: 1;
   }
 
-  a {
-    font-size: 1.5rem;
+  button {
+    color: #ba3939;
   }
+}
+
+.message {
+  color: #ba3939;
+  background: #ffe0e0;
+  border: 1px solid #a33a3a;
+  font-weight: bold;
+}
+
+.message:empty {
+  display: none;
+}
+
+.message.info {
+  color: #2b7515;
+  background: #ecffd6;
+  border-color: #617c42;
 }
