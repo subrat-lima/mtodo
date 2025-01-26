@@ -2,6 +2,8 @@ import json
 
 import pytest
 
+from mtodo.models import OAuth, Todo, User, db
+
 
 class TestBaseBlueprint:
     def test_index(self, client):
@@ -29,24 +31,27 @@ class TestTodoBlueprint:
             headers={"content-type": "application/json"},
             follow_redirects=True,
         )
+        todo = db.session.query(Todo).first()
         assert response.status_code == 200
         assert response.json["status"] == True
         assert response.json["text"] == "todo added"
-        assert response.json["id"] == 1
+        assert response.json["id"] == todo.id
 
     def test_get(self, default_todo):
         response = default_todo.get("/api/todos", follow_redirects=True)
+        todo = db.session.query(Todo).first()
         assert response.status_code == 200
         assert response.json["status"] == True
         assert response.json["data"] is not None
         assert len(response.json["data"]) == 1
-        assert response.json["data"][0]["user_id"] == 1
+        assert response.json["data"][0]["user_id"] == todo.user.id
         assert response.json["data"][0]["text"] == "task 1"
         assert response.json["data"][0]["done"] == False
 
     def test_update(self, default_todo):
+        todo = db.session.query(Todo).first()
         response = default_todo.put(
-            "/api/todos/1",
+            f"/api/todos/{todo.id}",
             data=json.dumps({"done": True}),
             headers={"content-type": "application/json"},
             follow_redirects=True,
@@ -56,16 +61,18 @@ class TestTodoBlueprint:
         assert response.json["text"] == "todo updated"
 
         response = default_todo.get("/api/todos", follow_redirects=True)
+        todo = db.session.query(Todo).first()
         assert response.status_code == 200
         assert response.json["status"] == True
         assert response.json["data"] is not None
         assert len(response.json["data"]) == 1
-        assert response.json["data"][0]["user_id"] == 1
+        assert response.json["data"][0]["user_id"] == todo.user.id
         assert response.json["data"][0]["text"] == "task 1"
         assert response.json["data"][0]["done"] == True
 
     def test_delete(self, default_todo):
-        response = default_todo.delete("/api/todos/1", follow_redirects=True)
+        todo = db.session.query(Todo).first()
+        response = default_todo.delete(f"/api/todos/{todo.id}", follow_redirects=True)
         assert response.status_code == 200
         assert response.json["status"] == True
         assert response.json["text"] == "todo deleted"

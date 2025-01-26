@@ -61,15 +61,22 @@ class TestTodo:
         assert todo.text == "task 1"
         assert todo.done == False
 
+    def test_todo_id_constraints(self, default_todo):
+        todo = db.session.query(Todo).first()
+
+        with pytest.raises(IntegrityError):
+            todo = Todo(text=todo.text, done=False, user_id=todo.user_id)
+            db.session.add(todo)
+            db.session.commit()
+
     @pytest.mark.parametrize(
         ("user_id", "text", "done"),
         [
-            (1, "task 1", True),
             (None, "text", False),
             (1, None, False),
         ],
     )
-    def test_todo_constraints(self, default_todo, user_id, text, done):
+    def test_todo_other_constraints(self, default_todo, user_id, text, done):
         with pytest.raises(IntegrityError):
             todo = Todo(text=text, done=done, user_id=user_id)
             db.session.add(todo)

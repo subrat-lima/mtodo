@@ -6,11 +6,13 @@ socketio = SocketIO()
 
 @socketio.on("join")
 def on_join(data):
-    room = str(current_user.id)
-    join_room(room)
+    if current_user:
+        room = str(current_user.id)
+        join_room(room)
 
 
 @socketio.on("leave")
 def on_leave(data):
-    room = str(current_user.id)
-    leave_room(room)
+    if current_user:
+        room = str(current_user.id)
+        leave_room(room)

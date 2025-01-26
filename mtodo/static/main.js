@@ -52,7 +52,7 @@ async function addTodoToUI(id, text, checked = false) {
   input.addEventListener("click", async (e) => {
     todos[id]["checked"] = input.checked;
     let resp = await updateTodoInBackend(id, input.checked);
-    if (resp.status == False) {
+    if (resp.status == false) {
       showToast(`update failed: ${resp.text}`);
     }
   });
@@ -61,7 +61,7 @@ async function addTodoToUI(id, text, checked = false) {
     li.remove();
     delete todos[id];
     let resp = await deleteTodoFromBackend(id);
-    if (resp.status == False) {
+    if (resp.status == false) {
       showToast(`delete failed: ${resp.text}`);
     }
   });

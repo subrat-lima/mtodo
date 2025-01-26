@@ -1,4 +1,4 @@
-from flask import flash
+from flask import flash, session
 from flask_dance.consumer import oauth_authorized, oauth_error
 from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from flask_dance.contrib.google import google, make_google_blueprint
@@ -38,6 +38,7 @@ def google_logged_in(blueprint, token):
         db.session.add_all([user, oauth])
         db.session.commit()
     login_user(oauth.user)
+    session["_flashes"].clear()
     flash("sucessfully signed in.", category="info")
     return False
 

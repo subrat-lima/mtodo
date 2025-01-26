@@ -24,7 +24,7 @@ def get():
 def add():
     room = str(current_user.id)
     data = request.json
-    if data["text"] is "":
+    if data["text"] == "":
         return jsonify({"status": False, "text": "text empty"})
     query = (
         db.session.query(Todo)
@@ -44,7 +44,7 @@ def add():
     return jsonify({"status": True, "text": "todo added", "id": todo.id})
 
 
-@bp.route("/<int:id>", methods=["PUT"])
+@bp.route("/<id>", methods=["PUT"])
 @login_required
 def update(id):
     todo = db.session.get(Todo, id)
@@ -62,7 +62,7 @@ def update(id):
     return jsonify({"status": True, "text": "todo updated"})
 
 
-@bp.route("/<int:id>", methods=["DELETE"])
+@bp.route("/<id>", methods=["DELETE"])
 @login_required
 def delete(id):
     todo = db.session.get(Todo, id)
